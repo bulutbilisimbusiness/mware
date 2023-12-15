@@ -1,27 +1,32 @@
 "use strict";
 const mongoose=require('mongoose')
-/* const nameSchema = new  mongoose.Schema({
-    fieldName: {
-        type:String,
-        default:null,
-        trim:true,
-        select:true,
-        index:false,
-        unique:false,
-        required: [ture,'Error-Message '],
-        enum:[[0,1,2,3],'Error-Message'],
-        validate:[function(data){return true},'Error-Message'],
-        get:function(data){return true},
-        set:function(data){return data},
 
+
+const blogCategorySchema=new mongoose.Schema({
+
+    name:{
+        type: String,
+        trim:true,
+        required:true,
     }
 },{
-    collation:'collectionName',
-    timestamps:true,
+    collection:'blogCategories',
+    timestamps:true
+})
 
-}) */
 
 const blogPostShema= new mongoose.Schema({
+
+    userId:{
+        type:mongoose.Schema.ObjectId,
+        required:true,
+        ref:"User",
+    },
+    blogCategoryId:{
+        type:mongoose.Schema.ObjectId,
+        required:true,
+        ref:"BlogCategory",
+    },
     title:{
         type: String,
         required: true,
@@ -44,6 +49,7 @@ const blogPostShema= new mongoose.Schema({
 //const BlogPostModel=mongoose.model('BlogPost',blogPostShema)
 
 module.exports={
+    BlogCategory:mongoose.model('BlogCategory',blogCategorySchema),
     BlogPost:mongoose.model('BlogPost',blogPostShema)
 
 }
