@@ -4,7 +4,8 @@ require("express-async-errors");
 const User = require("../models/userModel");
 module.exports.User = {
 	list: async (req, res) => {
-		const data = await User.find();
+		//const data = await User.find();
+		const data = await req.getModelList(User)
 		res.status(200).send({
 			error: false,
 			count: data.length,
@@ -47,9 +48,19 @@ module.exports.User = {
 		if (email && password) {
 			const user = await User.findOne({ email: email, password: password })
             if(user){
+				req.session={
+					user:{
+						email:user.email,
+						password:user.password
+					}
+				}
+				if(req.body?.rememberMe){
+					req.sessionOptions.maxAge=1000*60*60*24*3
+				}
                 res.status(200).send({
                     error:false,
-                    result:user
+                    result:user,
+					session:req.session
                 })
             } else {
                 res.errorStatusCode=401
@@ -60,4 +71,11 @@ module.exports.User = {
             throw new Error("Please provide both fields")
         }
 	},
+	logout:async(req,res)=>{
+		req.session=null
+		res.status(200).send({
+			error:false,
+			message:'Logout'
+		})
+	}
 };
