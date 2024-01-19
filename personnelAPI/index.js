@@ -40,6 +40,7 @@ app.all('/',(req,res)=>{
         isLogin:req.isLogin
     })
 })
+app.use('/auth',require('./src/routes/auth.router'))
 app.use('/departments',require('./src/routes/department.router'))
 app.use('/personnels',require('./src/routes/personnel.router'))
 app.use(require('./src/middlewares/errorHandler'))
