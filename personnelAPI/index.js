@@ -12,6 +12,14 @@ require('express-async-errors')
 const {dbConnection}=require('./src/configs/dbConnection')
 dbConnection()
 
+const morgan=require('morgan')
+
+const fs = require('node:fs')
+const now = new Date()
+const today = now.toISOString().split('T')[0]
+app.use(morgan('combined',{
+    stream:fs.createWriteStream(`./logs/${today}.log`,{flags:'a'})
+}))
 app.use(express.json())
 
 app.use(require('cookie-session')({secret:process.env.SECRET_KEY}))
