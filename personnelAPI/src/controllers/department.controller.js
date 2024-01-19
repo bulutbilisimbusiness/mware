@@ -6,6 +6,7 @@ module.exports={
     list: async (req,res)=>{
         const data = await res.getModelList(Department)
         res.status(200).send({
+            //isLogin:req.isLogin,
             error:false,
             details:await res.getModelListDetails(Department),
             data
