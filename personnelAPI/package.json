@@ -1,5 +1,5 @@
 {
-  "title":"Personnel API",
+  "title": "Personnel API",
   "name": "personnelapi",
   "version": "1.0.0",
   "description": "Personnel Management System",
@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.3",
     "morgan": "^1.10.0",
-    "swagger-autogen": "^2.23.7"
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.0"
   }
 }
