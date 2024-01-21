@@ -66,10 +66,41 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerJson = require("./swagger.json");
 app.use('/docs/swagger', swaggerUi.serve, swaggerUi.setup(swaggerJson, { swaggerOptions: { persistAuthorization: true } }))
 
+const redoc=require('redoc-express')
+app.use('/docs/json',(req,res)=>{
+    res.sendFile('swagger.json',{root:'.'})
+})
+app.use('/docs/redoc',redoc({
+    specUrl:'/docs/json',
+    title:'API Docs',
+    redocOptions:{
+    theme:{
+        colors:{
+            primary:{
+                main:"#12C5AB"
+            }
+        },
+        typography:{
+            fontFamily:`"museo-sans",'Helvetica Neue',Helvetica,Arial,sans-serif`,
+            fontSize:'15px',
+            lineHeight:'1.5',
+            code:{
+                code:'#87E8C7',
+                backgroundColor: '#ffffff'
+            }
+        }
+    }}
+}))
 app.all("/", (req, res) => {
 	res.send({
 		error: false,
 		message: "Welcome to the PERSONNEL API",
+        api:{
+           documents:{json:'/docs/json',
+            swagger:'/docs/swagger',
+            redoc:'/docs/redoc'} ,
+            contact:"erhanbulut.2021@gmail.com"
+        },
 		//session:req.session,
 		isLogin: req.isLogin,
 		user: req.user,

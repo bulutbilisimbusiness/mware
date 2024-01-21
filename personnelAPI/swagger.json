@@ -7,7 +7,7 @@
     "termsOfService": "http://www.clarusway.com",
     "contact": {
       "name": "Erhan",
-      "email": "qadir@clarusway.com"
+      "email": "erhanbulut_@outlook.com"
     },
     "license": {
       "name": "MIT License"
@@ -546,9 +546,9 @@
               "type": "string",
               "example": "string"
             },
-            "example": {
+            "exampleUsing": {
               "type": "string",
-              "example": "username: test"
+              "example": "'username': 'test'"
             }
           }
         },
@@ -727,7 +727,7 @@
             },
             "default": {
               "type": "number",
-              "example": 1705837665073
+              "example": 1705839993175
             }
           }
         }
