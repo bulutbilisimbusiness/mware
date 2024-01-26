@@ -1,5 +1,16 @@
-"use strict"
+"use strict";
 
-const router = require('express').Router()
+const router = require("express").Router();
 
-module.exports = router
+const order = require("../controllers/order");
+router.route("/")
+    .get(order.list)
+    .post(order.create);
+router.route('/:id')
+    .get(order.read)
+    .put(order.update)
+    .patch(order.update)
+    .delete(order.delete)
+
+
+module.exports = router;

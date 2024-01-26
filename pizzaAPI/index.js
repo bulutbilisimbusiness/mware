@@ -25,6 +25,13 @@ app.all('/',(req,res)=>{
     })
 })
 
+app.use('/auth',require('./src/routes/auth'))
+
+app.use('/users',require('./src/routes/user'))
+
+app.use('/orders',require('./src/routes/order'))
+app.use('/pizzas',require('./src/routes/pizza'))
+app.use('/toppings',require('./src/routes/topping'))
 
 app.use(require('./src/middlewares/errorHandler'))
 

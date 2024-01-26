@@ -1,5 +1,16 @@
-"use strict"
+"use strict";
 
-const router = require('express').Router()
+const router = require("express").Router();
 
-module.exports = router
+const topping = require("../controllers/topping");
+router.route("/")
+    .get(topping.list)
+    .post(topping.create);
+router.route('/:id')
+    .get(topping.read)
+    .put(topping.update)
+    .patch(topping.update)
+    .delete(topping.delete)
+
+
+module.exports = router;
