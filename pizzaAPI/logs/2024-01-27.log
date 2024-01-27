@@ -14,3 +14,5 @@
 ::ffff:127.0.0.1 - - [27/Jan/2024:18:01:17 +0000] "GET / HTTP/1.1" 200 64 "-" "Thunder Client (https://www.thunderclient.com)"
 ::ffff:127.0.0.1 - - [27/Jan/2024:18:01:29 +0000] "GET / HTTP/1.1" 200 63 "-" "Thunder Client (https://www.thunderclient.com)"
 ::ffff:127.0.0.1 - - [27/Jan/2024:18:01:56 +0000] "GET / HTTP/1.1" 200 376 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [27/Jan/2024:18:08:22 +0000] "POST /auth/refresh HTTP/1.1" 200 540 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [27/Jan/2024:18:08:55 +0000] "GET / HTTP/1.1" 200 376 "-" "Thunder Client (https://www.thunderclient.com)"
