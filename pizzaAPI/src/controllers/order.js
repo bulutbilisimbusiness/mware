@@ -1,6 +1,7 @@
 "use strict";
 
 const Order = require("../models/order");
+const Pizza = require("../models/pizza");
 module.exports = {
 	list: async (req, res) => {
 		/*
@@ -15,10 +16,12 @@ module.exports = {
                 </ul>
                 `
         */
-		const data = await res.getModelList(Order);
+		const data = await res.getModelList(Order,{},[
+            'userId',
+            {path:'pizzaId',populate:'toppings'}]);
 		res.status(200).send({
 			error: false,
-			details:await  res.getModelListDetails(Order),
+			details: await res.getModelListDetails(Order),
 			data,
 		});
 	},
@@ -27,43 +30,61 @@ module.exports = {
             #swagger.tags = ["Orders"]
             #swagger.summary = "Create Order"
         */
+		req.body.quantity = req.body?.quantity || 1;
+		if (!req.body?.price) {
+			const dataPizza = await Pizza.findOne({ _id: req.body.pizzaId },{ _id: 0, price: 1 });
+			req.body.price = dataPizza.price;
+		}
+		req.body.totalPrice = req.body.price * req.body.quantity;
 		const data = await Order.create(req.body);
-        res.status(201).send({
-            error:false,
-            data
-        })
+		res.status(201).send({
+			error: false,
+			data,
+		});
 	},
 	read: async (req, res) => {
 		/*
             #swagger.tags = ["Orders"]
             #swagger.summary = "Get Single Order"
         */
-       const data = await Order.findOne({ _id: req.params.id })
-       res.status(200).send({
-        error:false,
-        data
-    })
+		const data = await Order.findOne({ _id: req.params.id }).populate([
+            'userId',
+            {path:'pizzaId',populate:'toppings'}]);
+		res.status(200).send({
+			error: false,
+			data,
+		});
 	},
 	update: async (req, res) => {
 		/*
             #swagger.tags = ["Orders"]
             #swagger.summary = "Update Order"
         */
-       const data = await Order.updateOne({ _id: req.params.id },req.body)
-       res.status(200).send({
-        error:false,
-        data, new: await Order.findOne({ _id: req.params.id })
-    })
+		req.body.quantity = req.body?.quantity || 1;
+		if (!req.body?.price) {
+			const dataOrder = await Order.findOne(
+				{ _id: req.params.id },
+				{ _id: 0, price: 1 }
+			);
+			req.body.price = dataOrder.price;
+		}
+		req.body.totalPrice = req.body.price * req.body.quantity;
+		const data = await Order.updateOne({ _id: req.params.id }, req.body);
+		res.status(200).send({
+			error: false,
+			data,
+			new: await Order.findOne({ _id: req.params.id }),
+		});
 	},
 	delete: async (req, res) => {
 		/*
             #swagger.tags = ["Orders"]
             #swagger.summary = "Delete Order"
         */
-       const data = await Order.deleteOne({ _id: req.params.id })
-       res.status(data.deletedCount ? 204: 404).send({
-        error:!data.deletedCount,
-        data
-    })
+		const data = await Order.deleteOne({ _id: req.params.id });
+		res.status(data.deletedCount ? 204 : 404).send({
+			error: !data.deletedCount,
+			data,
+		});
 	},
 };

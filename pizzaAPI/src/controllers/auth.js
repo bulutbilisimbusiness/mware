@@ -1,6 +1,6 @@
 "use strict";
 const jwt = require("jsonwebtoken");
-
+const setToken=require('../helpers/setToken')
 const User = require("../models/user");
 
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
 			const user = await User.findOne({ username, password });
 			if (user) {
 				if (user.isActive) {
-					const data = {
+					/* const data = {
 						access: user.toJSON(),
 						refresh: { _id: user._id, password: user.password },
 						shortExpiresIn: "10m",
@@ -41,7 +41,11 @@ module.exports = {
 								expiresIn: data.longExpiresIn,
 							}),
 						},
-					});
+					}); */
+                    res.send({
+                        error:false,
+                        token:setToken(user),
+                    })
 				} else {
 					res.errorStatusCode = 401;
 					throw new Error("This account is not active.");
@@ -86,7 +90,7 @@ module.exports = {
 							const user = await User.findOne({ _id });
 							if (user && user.password == password) {
 								if (user.isActive) {
-									const data = {
+									/* const data = {
 										access: user.toJSON(),
 										refresh: { _id: user._id, password: user.password },
 										shortExpiresIn: "10m",
@@ -100,7 +104,12 @@ module.exports = {
 											}),
 											refresh: null,
 										},
-									});
+									}); */
+                                    
+                                    res.send({
+                                        error:false,
+                                        token:setToken(user,true),
+                                    })
 								} else {
 									res.errorStatusCode = 401;
 									throw new Error("This account is not active.");
