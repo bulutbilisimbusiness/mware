@@ -363,8 +363,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {}
+              "$ref": "#/definitions/Flight"
             }
           }
         ],
@@ -414,8 +413,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {}
+              "$ref": "#/definitions/Flight"
             }
           }
         ],
@@ -478,8 +476,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {}
+              "$ref": "#/definitions/Flight"
             }
           }
         ],
@@ -513,16 +510,19 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "createdId": {
+                  "example": "any"
+                }
+              }
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "202": {
+            "description": "Accepted"
           }
         }
       }
@@ -564,16 +564,19 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "createdId": {
+                  "example": "any"
+                }
+              }
             }
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -628,16 +631,19 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "createdId": {
+                  "example": "any"
+                }
+              }
             }
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -668,7 +674,40 @@
             "required": true,
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "flightId": {
+                  "type": "string",
+                  "example": "...Flight.objectId..."
+                },
+                "passengers": {
+                  "type": "array",
+                  "example": [
+                    "...Passenger.objectId...",
+                    {
+                      "firstName": "string",
+                      "lastName": "string",
+                      "email": "string:email"
+                    }
+                  ],
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "firstName": {
+                        "type": "string",
+                        "example": "string"
+                      },
+                      "lastName": {
+                        "type": "string",
+                        "example": "string"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "string:email"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         ],
@@ -716,16 +755,19 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "createdId": {
+                  "example": "any"
+                }
+              }
             }
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -780,16 +822,41 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "createdId": {
+                  "example": "any"
+                }
+              }
             }
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/reservations/{id}/passengers": {
+      "get": {
+        "tags": [
+          "Reservations"
+        ],
+        "summary": "List Passengers of Reservation",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }

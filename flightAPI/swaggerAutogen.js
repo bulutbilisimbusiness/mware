@@ -8,7 +8,6 @@ const PORT = process.env?.PORT || 8000
 /* ------------------------------------------------------- */
 const swaggerAutogen = require('swagger-autogen')()
 const packageJson = require('./package.json')
-
 const document = {
 	info: {
 		version: packageJson.version,
@@ -18,10 +17,10 @@ const document = {
 		contact: { name: packageJson.author, email: "erhanbulut.2021@gmail.com" },
 		license: { name: packageJson.license, },
 	},
-	host: `${HOST}:${PORT}`,
+    host: `${HOST}:${PORT}`,
 	basePath: '/',
 	schemes: ['http', 'https'],
-	// JWT Settings:
+    	// JWT Settings:
 	securityDefinitions: {
 		JWT: {
 			type: 'apiKey',
@@ -31,7 +30,7 @@ const document = {
 		}
 	},
 	security: [{ "JWT": true }],
-	definition: {
+    definitions: {
 		"/auth/login": {
 			username: {
 				type: "String",
@@ -55,8 +54,7 @@ const document = {
 		"Passenger": require('./src/models/passenger').schema.obj,
 		"Reservation": require('./src/models/reservation').schema.obj,
 	}
-};
-
+}
 const routes = ['./index.js']
 const outputFile = './src/configs/swagger.json'
 
