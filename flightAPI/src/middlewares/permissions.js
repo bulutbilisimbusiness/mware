@@ -6,7 +6,7 @@ module.exports = {
 
     isLogin: (req, res, next) => {
 
-        return next()
+       // return next()
         
         if (req.user) {
             next()
@@ -18,7 +18,7 @@ module.exports = {
 
     isAdmin: (req, res, next) => {
 
-        return next()
+        //return next()
         
         if (req.user && req.user.isAdmin) {
             next()
@@ -28,9 +28,9 @@ module.exports = {
         }
     },
 
-    isStaff: (req, res, next) => {
+    isStaffOrAdmin: (req, res, next) => {
 
-        return next()
+        //return next()
         
         if (req.user && (req.user.isAdmin || req.user.isStaff)) {
             next()

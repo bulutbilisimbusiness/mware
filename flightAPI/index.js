@@ -48,11 +48,7 @@ app.all('/', (req, res) => {
     })
 })
 
-// auth:
-app.use('/auth', require('./src/routes/auth'))
-// document:
-app.use('/documents', require('./src/routes/document'))
-
+app.use('/',require('./src/routes'))
 
 
 // errorHandler:
