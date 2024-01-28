@@ -47,3 +47,6 @@
 ::ffff:127.0.0.1 - - [28/Jan/2024:09:40:45 +0000] "POST /auth/login HTTP/1.1" 200 837 "http://127.0.0.1:8000/documents/swagger/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 ::ffff:127.0.0.1 - - [28/Jan/2024:09:42:13 +0000] "POST /auth/login HTTP/1.1" 200 837 "http://127.0.0.1:8000/documents/swagger/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 ::ffff:127.0.0.1 - - [28/Jan/2024:10:47:51 +0000] "GET /flights HTTP/1.1" 200 776 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [28/Jan/2024:11:02:31 +0000] "GET /flights HTTP/1.1" 500 1382 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [28/Jan/2024:11:05:01 +0000] "GET /flights HTTP/1.1" 200 980 "-" "Thunder Client (https://www.thunderclient.com)"
+::ffff:127.0.0.1 - - [28/Jan/2024:11:12:34 +0000] "GET /flights HTTP/1.1" 200 975 "-" "Thunder Client (https://www.thunderclient.com)"
