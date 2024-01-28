@@ -6,7 +6,7 @@ module.exports = {
 
     isLogin: (req, res, next) => {
 
-       // return next()
+       if(process.env.NODE_ENV == 'development') return next()
         
         if (req.user) {
             next()
@@ -18,7 +18,7 @@ module.exports = {
 
     isAdmin: (req, res, next) => {
 
-        //return next()
+        if(process.env.NODE_ENV == 'development') return next()
         
         if (req.user && req.user.isAdmin) {
             next()
@@ -30,7 +30,7 @@ module.exports = {
 
     isStaffOrAdmin: (req, res, next) => {
 
-        //return next()
+        if(process.env.NODE_ENV == 'development') return next()
         
         if (req.user && (req.user.isAdmin || req.user.isStaff)) {
             next()
