@@ -3,9 +3,10 @@
 const router = require('express').Router()
 /* ------------------------------------------------------- */
 // routes/token:
-
+const permissions=require('../middleware/permissions')
 const token=require('../controllers/token')
 
+router.use(permissions.isAdmin)
 router.route('/')
     .get(token.list)
     .post(token.create)

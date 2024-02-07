@@ -3,17 +3,17 @@
 const router = require('express').Router()
 /* ------------------------------------------------------- */
 // routes/car:
-
+const permissions=require('../middleware/permissions')
 const car=require('../controllers/car')
 
 router.route('/')
     .get(car.list)
-    .post(car.create)
+    .post(permissions.isAdmin,car.create)
 
 router.route('/:id')
     .get(car.read) 
-       .put(car.update)
-       .patch(car.update)
-       .delete(car.delete)
+       .put(permissions.isAdmin,car.update)
+       .patch(permissions.isAdmin,car.update)
+       .delete(permissions.isAdmin,car.delete)
 
 module.exports=router       
