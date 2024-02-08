@@ -3,7 +3,7 @@
 const router = require('express').Router()
 /* ------------------------------------------------------- */
 // routes/car:
-const permissions=require('../middleware/permissions')
+const permissions=require('../middlewares/permissions')
 const car=require('../controllers/car')
 
 router.route('/')

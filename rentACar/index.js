@@ -37,6 +37,10 @@ app.use(require('./src/middlewares/logger'))
 app.use(require('./src/middlewares/findSearchSortPage'))
 
 /* ------------------------------------------------------- */
+// Sending Mail(nodemailler):
+const nodemailer=require('nodemailer')
+
+nodemailer.createTestAccount().then((email)=>console.log(email))
 // Routes:
 
 // HomePath:
@@ -66,4 +70,4 @@ app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`))
 
 /* ------------------------------------------------------- */
 // Syncronization (must be in commentLine):
-require('./src/helpers/sync')()
+//require('./src/helpers/sync')()

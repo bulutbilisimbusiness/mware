@@ -3,7 +3,7 @@
 const router = require('express').Router()
 /* ------------------------------------------------------- */
 // routes/reservation:
-const permissions=require('../middleware/permissions')
+const permissions=require('../middlewares/permissions')
 const reservation=require('../controllers/reservation')
 
 router.route('/')

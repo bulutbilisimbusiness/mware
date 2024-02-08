@@ -18,7 +18,7 @@ module.exports = async function () {
     await User.create({
         "_id": "65343222b67e9681f937f001",
         "username": "admin",
-        "password": "eE*12356",
+        "password": "aA*123456",
         "email": "admin@site.com",
         "firstName": "admin",
         "lastName": "admin",
@@ -28,7 +28,7 @@ module.exports = async function () {
     await User.create({
         "_id": "65343222b67e9681f937f002",
         "username": "test",
-        "password": "eE*12356",
+        "password": "aA*123456",
         "email": "test@site.com",
         "firstName": "test",
         "lastName": "test",
