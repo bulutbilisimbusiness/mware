@@ -1,5 +1,5 @@
 "use strict"
-
+const Reservation=require('../models/reservations')
 const Car = require('../models/car')
 
 module.exports={
@@ -16,11 +16,26 @@ module.exports={
                 </ul>
             `
         */
-       const data= await res.getModelList(Car)
+       let filters={}
+       if(!req.user?.isAdmin) filters.isPublish=true
+
+       const {start:getStartDate,end:getEndDate}= req.query
+       if(getStartDate && getEndDate) {
+        const reservedCars= await Reservation.find({
+            $nor:[
+                { startDate:{$gt: getEndDate}},
+                { endDate:{ $lt:getStartDate}}
+            ]
+        },{ _id:0,carId:1}).distinct('carId')
+        if(reservedCars.length){
+            filters._id={$nin:reservedCars}
+        }
+       }
+       const data= await res.getModelList(Car,filters)
 
        res.status(200).send({
         error:false,
-        details: await res.getModelListDetails(Car),
+        details: await res.getModelListDetails(Car,filters),
         data
        })
     },
@@ -36,6 +51,10 @@ module.exports={
                 }
             }
         */
+       if(req?.user){
+        req.body.createdId=req.user._id
+        req.body.updatedId=req.user._id
+       }
        const data= await Car.create(req.body)
        res.status(201).send({
         error:false,
@@ -66,7 +85,10 @@ module.exports={
                 }
             }
         */
-
+            if(req?.user){
+               
+                req.body.updatedId=req.user._id
+               }
         const data=    await Car.updateOne({_id: req.params.id},req.body,{runValidators:true})
         res.status(200).send({
             error:false,
