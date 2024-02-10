@@ -37,7 +37,7 @@ module.exports = (req, res, next) => {
 
         const filtersAndSearch = { ...filters, ...search }
 
-        const dataCount = await Model.count(filtersAndSearch)
+        const dataCount = await Model.countDocuments(filtersAndSearch)
 
         let details = {
             search,

@@ -81,6 +81,10 @@ module.exports = {
             }
         */
 
+        // console.log('body:', req.body)
+        // console.log('file:', req.file) // upload.single()
+        // console.log('files:', req.files) // upload.array() or upload.any()
+
         if (req?.user) {
             // Set userIds from login info:
             req.body.createdId = req.user._id
@@ -120,6 +124,16 @@ module.exports = {
                 }
             }
         */
+
+        // console.log('body:', req.body)
+        // console.log('file:', req.file) // upload.single()
+        // console.log('files:', req.files) // upload.array() or upload.any()
+
+        req.body.images = req.body?.images || []
+        for (let file of req.files) {
+            // console.lof(file)
+            req.body.images.push('/img/' + file.originalname)
+        }
 
         if (req?.user) {
             // Set userIds from login info:

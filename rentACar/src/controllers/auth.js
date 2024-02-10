@@ -1,4 +1,6 @@
-"use strict";
+"use strict"
+
+// Auth Controller:
 
 const User = require('../models/user')
 const Token = require('../models/token')
